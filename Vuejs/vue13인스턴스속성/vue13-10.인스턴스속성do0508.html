@@ -72,7 +72,6 @@
       return {
         message: "",
         methodscopy: "",
-        computedcopy: "",
         watchcopy: "",
       };
     },
@@ -82,12 +81,12 @@
       },
     },
     computed: {
-      reverseMsg: function (e) {
-        return this.message;
+      computedcopy: function () {
+        return this.message.split("").reverse().join("");
       },
     },
     watch: {
-      message: function (data) {
+      message: function () {
         this.$data.watchcopy = this.message;
       },
     },
