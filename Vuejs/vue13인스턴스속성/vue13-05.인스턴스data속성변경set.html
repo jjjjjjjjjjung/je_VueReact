@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
+    <script src="https://unpkg.com/vue@2.5.16/dist/vue.js">
+      /* vue 플러그인 임포트 */
+    </script>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
 
     <!-- CSS import -->
-    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/reset.css" />
 
     <style>
-        span {
-            font-size: 3em;
-        }
+      span {
+        font-size: 3em;
+      }
     </style>
+  </head>
 
-    
-
-</head>
-
-<body>
+  <body>
     <pre>
 
     data 속성 주의 사항
@@ -59,15 +61,44 @@
         (4) [500, 3, 4, 5, 70]   <== 방법4을 적용
 
     </pre>
-    <hr>
+    <hr />
     <div id="app">
-        <span v-for="(val, i) in arr" v-bind:key="i"> {{val}} </span>
-        <br>
-        <button v-on:click="change1">방법1로 변경</button>
-        <button v-on:click="change2">방법2로 변경</button>
-        <button v-on:click="change3">방법3로 변경</button>
-        <button v-on:click="change4">방법4로 변경</button>
+      <span v-for="(val, i) in arr" v-bind:key="i"> {{val}} </span>
+      <br />
+      <button v-on:click="change1">방법1로 변경</button>
+      <button v-on:click="change2">방법2로 변경</button>
+      <button v-on:click="change3">방법3로 변경</button>
+      <button v-on:click="change4">방법4로 변경</button>
     </div>
-</body>
-
-</html>
+  </body>
+</html>
+<script>
+  new Vue({
+    el: "#app",
+    data() {
+      return {
+        arr: [1, 2, 3, 4, 5],
+      };
+    },
+    methods: {
+      change1: function (e) {
+        this.$data.arr[0] = 100;
+        Vue.set(this.$data.arr, 0, 100);
+        console.log(this.$data.arr);
+      },
+      change2: function (e) {
+        this.$set(this.$data.arr, 1, 300); // === Vue.set
+        console.log(this.$data.arr);
+      },
+      change3: function (e) {
+        this.arr.splice(0, 2, 500); //splice는 지우고 새로 만드는거라 된다.
+        console.log(this.$data.arr);
+      },
+      change4: function (e) {
+        var arr_copy = [...this.arr, 70]; // ...:ES6에서 도립괸 spread연산다 (메모리까지 복사하)
+        this.arr = arr_copy;
+        console.log(this.$data.arr);
+      },
+    },
+  });
+</script>

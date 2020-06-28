@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vue Sample</title>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
 
     <!-- CSS import -->
-    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/reset.css" />
 
     <!-- vue 스크립트 플러그인 임포트   -->
-    
+  </head>
 
-</head>
-
-<body>
-    <xmp>
+  <body>
+    <xmp
+>
       Vue 인스턴스 속성은 e dt mc^2 life cycel 이다.
       Vue 인스턴스 생성 방법을 반복 학습한다.
 
@@ -34,15 +35,35 @@
 
      [참조]page 40
     </xmp>
-    <hr>
+    <hr />
 
-    <div>
-        {{ message }}
+    <div id="app1">
+      {{ message }}
     </div>
 
-    <div>
-        {{ message }}
+    <div id="app2">
+      {{ message }}
     </div>
-</body>
-
+  </body>
 </html>
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">
+  /* vue 플러그인 임포트 */
+</script>
+<script>
+  var vm1 = new Vue({
+    el: "#app1",
+    data() {
+      return {
+        message: "Hello",
+      };
+    },
+  });
+  var vm2 = new Vue({
+    el: "#app2",
+    data() {
+      return {
+        message: "Vue.js",
+      };
+    },
+  });
+</script>

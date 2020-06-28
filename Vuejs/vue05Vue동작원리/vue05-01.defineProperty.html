@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vue Sample</title>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
 
     <!-- CSS import -->
-    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/reset.css" />
 
     <!-- vue 스크립트 플러그인 임포트   -->
-    
+    <script src="https://unpkg.com/vue@2.5.16/dist/vue.js">
+      /* vue 플러그인 임포트 */
+    </script>
+  </head>
 
-</head>
-
-<body>
-    <xmp>
+  <body>
+    <xmp
+>
         Vue Reactivity의 동작 원리에 대해서 배운다.
 
         Object.defineProperty()를 이용해서 양방향 바인딩의 개녕을 익힌다.
@@ -35,20 +39,20 @@
 
         [참조]page 178
     </xmp>
-    <hr>
+    <hr />
 
     <h1>Vue Reactivity의 동작 원리</h1>
 
-    <hr color="red">
+    <hr color="red" />
     <pre>
       Vue 를 이용하여 #app1 의 {{msg}} 에 "Hello" 를 출력한다.
       Vue 의 인스턴스 명은 vm1 으로 만드시오. var vm1 = new Vue();
     </pre>
     <div id="app">
-        <h2>{{msg}}</h2>
+      <h2>{{msg}}</h2>
     </div>
 
-    <hr color="red">
+    <hr color="red" />
     <pre>
       #app2 에 Object.defineProperty() 메서드의 get, set 설정하고
       "123" 을 출력한다.
@@ -58,8 +62,35 @@
       엘리먼트의 innerHTML 또는 innerText 프러퍼티 사용.
     </pre>
     <h2 id="app2">
-        <!-- 이자리에 있는 정보를 가져오다. -->
+      <!-- 이자리에 있는 정보를 가져오다. -->
     </h2>
-</body>
+  </body>
+  <script>
+    var vm1 = new Vue({
+      el: "#app",
+      data() {
+        return {
+          msg: "Hello",
+        };
+      },
+    });
+  </script>
+  <script>
+    var div = document.getElementById("app2");
+    var data = {};
+    Object.defineProperty(data, "msg", {
+      get: function () {
+        return div.innerHTML;
+      },
+      set: function (val) {
+        debugger; //break point;
+        div.innerHTML = val;
+      },
+    });
 
+    data["msg"] = "123";
+    data.msg = "abc";
+
+    console.log(data.msg);
+  </script>
 </html>

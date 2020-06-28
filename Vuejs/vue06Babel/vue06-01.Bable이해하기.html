@@ -1,13 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vue Sample</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"
+    >
+      /* JSX를 자바스크립트로 변환 */
+    </script>
+    <script type="text/javascript"></script>
+    <script type="text/babel">
+      //                        es6                                     ==>  es5 변환
+      // 변수선언 : let, const                                              var
+      //                  블락 스코핑                                      함수스코핑
+      // 함수선언 : function(){} / ()=>{}                 function(){}
 
-    
-</head>
-<body>
+      const getMessage = () => {
+        return "hello, es6!!";
+      };
+
+      document.getElementById("output").innerText = getMessage();
+    </script>
+  </head>
+  <body>
     <pre>
 
         Babel 에 대해서 학습한다.
@@ -16,11 +32,8 @@
             ES6 를 ES5 로 바꾸어 주는
 
     </pre>
-    <div id="output">
-
-    </div>
-
-</body>
+    <div id="output"></div>
+  </body>
 </html>
 
 <!-- Your custom script here -->
