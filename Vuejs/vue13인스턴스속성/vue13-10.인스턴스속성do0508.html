@@ -67,27 +67,39 @@
 </html>
 <script>
   new Vue({
+    //js에서 대문자는 생성자 함수라는 암묵적 규칙
     el: "#app",
     data() {
+      // e dt mc^2 w
       return {
-        message: "",
+        message: "hello, Vue.js!",
         methodscopy: "",
         watchcopy: "",
+        // computedcopy: "", //computed 속성과 중복해서 사용 불가
       };
     },
+    template: null,
     methods: {
       reverseMsg: function (e) {
-        this.$data.methodscopy = this.message;
+        // return this.$data.methodscopy = this.message;
+        var m = this.message.split(" ").reverse().join(" "); //" ":공백을 기준으로 잘라라
+        // this.message = m;  // string, bullen, number는 직접 바꿀 수 있다
+        this.$set(this.$data, "message", m); //$set은 데이터값 바꿀 때
+        this.$data.methodscopy = m;
       },
     },
+    components: null,
     computed: {
       computedcopy: function () {
-        return this.message.split("").reverse().join("");
+        // return this.message.split("").reverse().join("");
+        return this.message;
       },
     },
     watch: {
-      message: function () {
-        this.$data.watchcopy = this.message;
+      message: function (val) {
+        console.log("message의 값이 바뀐다:", val);
+        // this.$data.watchcopy = this.message;
+        this.$data.watchcopy = val;
       },
     },
   });

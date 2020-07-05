@@ -12,8 +12,8 @@
     <!-- CSS import -->
     <link rel="stylesheet" href="../css/reset.css">
     <style lang="">
-        ul {
-            list-style-type: disc;
+        ul li {
+            list-style-type: disc
         }
 
         span {
@@ -26,7 +26,9 @@
     </style>
 
     <!-- vue 스크립트 플러그인 임포트   -->
-    
+    <script src="https://unpkg.com/vue@2.5.16/dist/vue.js">
+        /* vue 플러그인 임포트 */
+      </script>
 
 </head>
 
@@ -69,7 +71,7 @@
         <div>
             <h2>Object Arrary rendered with v-for:</h2>
             <select name="" id="">
-                <option v-for="option in options">
+                <option v-for="option in options" v-bind:key="value">
                     {{ option.text }} : {{ option.value}}
                 </option>
             </select>
@@ -79,3 +81,28 @@
 </body>
 
 </html>
+
+<script>
+new Vue({
+    el:"#app",
+    data:{
+        systems: ["android", "ios", "??"],
+        arr: [1,2,3,4,5],
+    },
+    methods: {
+        
+    },
+});
+
+new Vue({
+    el:"#app1",
+    data:{
+        options:[
+            { text: 'One', value: 'A' },
+            { text: 'Two', value: 'B' },
+            { text: 'Three', value: 'C' }
+        ]
+    },
+
+})
+</script>

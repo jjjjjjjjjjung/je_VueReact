@@ -24,7 +24,9 @@
     </style>
 
     <!-- vue 스크립트 플러그인 임포트   -->
-    
+    <script src="https://unpkg.com/vue@2.5.16/dist/vue.js">
+        /* vue 플러그인 임포트 */
+      </script>
 
 </head>
 <body>
@@ -48,7 +50,8 @@
     <hr>
 
 
-    <h2>v-if 연습 1</h2>
+    <h2>v-if 연습 1 <br>
+        1. #app1의 인스턴스 data 프로퍼티(속성) awesome에 어떤값을 설정하면 될까?</h2>
     <div id="app1">
         <h3 v-if="awesome">Vue is awesome!</h3>
         <h3 v-else>Oh no 😢</h3>
@@ -72,7 +75,7 @@
     </div>
 
     <h2>v-if/v-else-if/v-else 연습 4 : 실습</h2>
-    <div id="app5">
+    <div id="app4">
         <button v-on:click="clickBind">클릭</button>
         <span v-if="type === 1">
             A
@@ -89,3 +92,58 @@
     </div>
 </body>
 </html>
+
+<script>
+var vm1 = new Vue({
+    el:"#app1",
+    data() {
+        return {
+            awesome:true
+        }
+    },
+});
+var vm2 = new Vue({
+    el:"#app2",
+    data() {
+        return {
+            awesome:false
+        }
+    },
+});
+var vm3 = new Vue({
+    el:"#app3",
+    data() {
+        return {
+            awesome:true,
+        }
+    },
+    methods: {
+        clickBind:function(e){
+            this.$data.awesome = !this.$data.awesome
+            // if(this.$data.awesome === true){
+            //     this.$data.awesome = false
+            // } else{
+            //     this.$data.awesome = true
+            // }
+        }
+    },
+});
+var vm4 = new Vue({
+    el:"#app4",
+    data: {
+        type:1,
+    },
+    methods: {
+        clickBind:function(e){
+            this.$data.type = this.$data.type+1;
+            //if 초기화 방식
+            // if(this.$data.type === 4){
+            //     this.$data.type = 0
+            // }
+          //나머지 연산자 방식
+          this.$data.type = this.$data.type % 4;
+        }
+    },
+});
+
+</script>

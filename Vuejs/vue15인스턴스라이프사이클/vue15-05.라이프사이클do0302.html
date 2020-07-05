@@ -1,35 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vue Instance Lifecycle</title>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
 
     <!-- CSS import -->
-    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/reset.css" />
 
     <!-- vue 스크립트 플러그인 임포트   -->
-    
-
-</head>
-<body>
+    <script src="https://unpkg.com/vue@2.5.16/dist/vue.js">
+      /* vue 플러그인 임포트 */
+    </script>
+  </head>
+  <body>
     <pre>
 
         Vue 라이프 사이클 단계 속성과 목적을 이해한다
 
         Vue 라이프 사이클 mounted 단계가 실행되게 하려면 어떻게 하면 되는가?
 		
-		mounted 단계는 화면의 일부분이 새로고침(렌더링)되는 것을 의미한다. 
+        mounted 단계는 화면의 일부분이 새로고침(렌더링)되는 것을 의미한다. 
+        
+        기능 추가
+        1. 버튼을 만들고 클릭 이벤트를 설정한다
+            버튼 추가 시 vue-13-10 예제를 참조하여 태그를 추가
+        2. 버튼을 클릭하면 message 값을 자신의 이름으로 바꾼다.
 
         [참조]page 49
     </pre>
-    <hr>
+    <hr />
 
     <div id="app">
-        {{ message }}
+      {{ message }}
+      <button v-on:click="btn">{{button}}</button>
     </div>
-</body>
+  </body>
 </html>
+<script>
+  new Vue({
+    el: "#app",
+    data() {
+      return {
+        message: "Hello, Vue.js!",
+        button: "name",
+      };
+    },
+    template: null,
+    methods: {
+      btn: function (e) {
+        this.message = this.button;
+      },
+    },
+    computed: {},
+    component: null,
+    watch: {},
+
+    //   life cycle : create > mount > update > destroy
+    beforeCreate: function () {
+      console.log("beforeCreate", this.message);
+    },
+    created: function () {
+      console.log("created", this.message);
+    },
+    beforeMount: function () {
+      console.log("beforeMount", this.message);
+    },
+    mounted: function () {
+      console.log("mounted", this.message);
+      this.message = "change message";
+    },
+    beforeUpdate: function () {
+      console.log("beforeUpdate", this.message);
+    },
+    updated: function () {
+      console.log("updated", this.message);
+    },
+    beforeDestroy: function () {
+      console.log();
+    },
+    destroyed: function () {
+      console.log();
+    },
+  });
+</script>
