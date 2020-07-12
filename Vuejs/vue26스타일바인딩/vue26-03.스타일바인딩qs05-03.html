@@ -149,17 +149,73 @@
 </html>
 <script>
   var app = document.getElementById("example3tobe");
-  new Vue({
-    el: "#example3",
+  var vm1 = new Vue({
+    el: "#elvue",
     data: {
-      style1: "",
+      style1: null,
     },
     methods: {
-      clickArrow: function (e) {
-        app.setAttribute("class", "tobe");
-        console.log(app);
-        // app.setAttribute("style", "fontSize:20px");
+      overEvent: function (event) {
+        this.$data.style1 = {
+          backgroundColor: "purple ",
+          color: "yellow",
+          textAlign: "center",
+        };
+      },
+      outEvent: function (event) {
+        this.$data.style1 = {
+          backgroundColor: "aqua",
+          color: "black",
+          textAlign: "center",
+        };
       },
     },
   });
+
+  var vm2 = new Vue({
+    el: "#example3",
+    data: {
+      style1: null,
+    },
+
+    methods: {
+      clickArrow: function (e) {
+        this.$data.style1 = {
+          height: "50px",
+          width: "150px",
+          border: "1px solid black",
+          textAlign: "center",
+          lineHeight: "50px",
+          fontWeight: 800,
+          color: "red",
+          backgroundColor: "darkgoldenrod",
+          padding: "50px",
+        };
+      },
+    },
+  });
+  // 자바스크립트로 변경하기
+  function overEvent(event) {
+    // document.getElementById(): 적용할 엘리먼트 찾기 === event.target : 자기 자신 X , event로 적어야함
+    //event.terget은 이벤트 자신을 가르키기 때문에 event가 들어있는 엘리먼트에 이벤트를 주고 싶다면target을 적으면 안된다.
+    event.style.backgroundColor = "purple";
+    event.style.color = "yellow";
+
+    /*object 합치기
+     1. object.assign() : 메서드 방식
+      2. spread 연산자 방식
+      3. jquery.extend() 메서드 방식
+      4. JSON.stringfy()
+     */
+
+    Object.assign(event.style, {
+      //기존에 적용된 스타일을 살리면서 변경하고 싶을 때 사용
+      backgroundColor: "darkgoldenrod",
+      color: "red",
+    });
+  }
+  function outEvent(event) {
+    event.style.backgroundColor = "red";
+    event.style.color = "#fff";
+  }
 </script>
