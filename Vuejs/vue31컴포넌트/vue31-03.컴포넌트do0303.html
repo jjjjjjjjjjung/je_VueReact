@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vue Component Registration</title>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
 
     <!-- CSS import -->
-    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/reset.css" />
 
     <!-- vue 스크립트 플러그인 임포트   -->
-    
-
-</head>
-<body>
-    <xmp>
+    <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+  </head>
+  <body>
+    <xmp
+>
         Vue 컴포넌트 만드는 방법을 배운다.
 
         컴포넌트는
@@ -28,21 +31,84 @@
         왜 컴포넌트를 사용하는가?
             컴포넌트를 재사용하기 위해서.
 
+        지역 컨포넌트의 버튼에 아래의 스타일을 설정한다
+            border:1px solid blue;
+            padding:3px;
+
         [참조]
             교재 page 52~61, 65
             https://kr.vuejs.org/v2/guide/components.html
     </xmp>
-    <hr>
+    <hr />
 
     <div id="app">
-        <h2>컴포넌트 등록</h2>
+      <h2>컴포넌트 등록</h2>
 
-        <global-component v-bind:propsdata="globalmsg1"></global-component>
-        <global-component v-bind:propsdata="globalmsg2"></global-component>
-        <hr>
-        <local-component v-bind:localmsg="localmsg1"></local-component>
-        <local-component v-bind:localmsg="localmsg2"></local-component>
+      <global-component v-bind:propsdata="globalmsg1"></global-component>
+      <global-component v-bind:propsdata="globalmsg2"></global-component>
+      <hr />
+      <local-component v-bind:localmsg="localmsg1"></local-component>
+      <!-- 왼쪽 자식, 오른쪽 부모 -->
+      <local-component v-bind:localmsg="localmsg2"></local-component>
     </div>
-
-</body>
+  </body>
 </html>
+<script>
+  // 전역 컴포넌트 만들기 : Vue.component()사용
+  Vue.component("global-component", {
+    props: ["propsdata"],
+    data() {
+      return {
+        style1: {
+          border: "1px solid red",
+          padding: "3px;",
+        },
+      };
+    },
+    template: `
+            <div>
+                전역 컴포넌트
+                <button v-on:click="gclick" v-bind:style="style1">{{propsdata}}</button>
+            </div>`,
+  });
+
+  // 지역 컴포넌트 만들기 : 변수 사용
+  var localComp = {
+    name: "local-component",
+    props: ["localmsg"],
+    data() {
+      return {
+        style1: {
+          border: "1px solid blue",
+          padding: "3px;",
+        },
+      };
+    },
+    template: `
+            <div>
+                지역 컴포넌트
+                <button v-on:click="gclick" v-bind:style="style1">{{localmsg}}</button>
+            </div>`,
+  };
+
+  new Vue({
+    // npdtmc^2w
+    el: "#app",
+    name: null,
+    props: ["propsdata"],
+    data() {
+      return {
+        globalmsg1: "인스턴스에서 전역 컴포넌트로 넘겨지는 값1",
+        globalmsg2: "인스턴스에서 전역 컴포넌트로 넘겨지는 값1",
+        localmsg2: "인스턴스에서 지역 컴포넌트로 넘겨지는 값1",
+        localmsg1: "인스턴스에서 지역 컴포넌트로 넘겨지는 값1",
+      };
+    },
+    template: null,
+    components: {
+      "local-component": localComp,
+      "local-component": localComp,
+    },
+    methods: {},
+  });
+</script>

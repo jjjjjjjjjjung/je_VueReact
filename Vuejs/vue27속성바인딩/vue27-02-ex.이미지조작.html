@@ -1,31 +1,58 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <style>
-        img { padding:5px; width:130px; height:130px; border:1px solid gray; }
+      img {
+        padding: 5px;
+        width: 130px;
+        height: 130px;
+        border: 1px solid gray;
+      }
     </style>
-</head>
-<body>
-	<pre>
+    <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+  </head>
+  <body>
+    <pre>
 		연습 문제. 직접 작성하여 본다. 
 		html 태그에 Vue 지시지 작성을 연습하는 예제입니다.
-		Vue 지시자를 설정하시오. 
-	</pre>
+		작업사항 1. Vue 지시자를 설정하시오. 
+	</pre
+    >
     <h2>&lt;img id="" src="" title="" alt="" /&gt;</h2>
-
-    <h3>어트리뷰트 추가</h3>
-    <img id="img1" src="../images/im1.jpg" title="im1.jpg" alt="im1.jpg" />
-    <img id="img2" />
-    <img id="img3" />
-    <img id="img4" />
-    <img id="img5" title="im5.jpg" />
-
+    <div id="vue">
+      <h3>어트리뷰트 추가</h3>
+      <img
+        id="img1"
+        src="../images/im1.jpg"
+        title="im1.jpg"
+        alt="im1.jpg"
+        v-on:click="imgClick"
+      />
+      <img id="im2" v-on:click="imgClick" />
+      <img id="img3" v-on:click="imgClick" />
+      <img id="imf4" v-on:click="imgClick" />
+      <img id="ims5" title="im5.jpg" />
+    </div>
     <h3>어트리뷰트 제거</h3>
     <img id="img6" src="../images/im5.jpg" title="im5" alt="im5.jpg" />
-</body>
+  </body>
 </html>
-
-<!-- 임포트 -->
+<script>
+  new Vue({
+    el: "#vue",
+    data: {},
+    methods: {
+      imgClick: function (e) {
+        debugger;
+        var str = e.target.id.substring(1, 2);
+        debugger;
+        var start = e.target.id.substr(0, 2);
+        var end = e.target.id.substr(e.target.id.length - 1, 1);
+        e.target.src = "../images/" + start + end + ".jpg";
+      },
+    },
+  });
+</script>
