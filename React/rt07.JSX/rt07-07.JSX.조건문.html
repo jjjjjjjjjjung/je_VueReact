@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
 
-    <link rel="stylesheet" href="../css/reset.css"/>
+    <link rel="stylesheet" href="../css/reset.css" />
     <style>
-        p {
-            background-color: lightblue;
-        }
+      p {
+        background-color: lightblue;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-    <xmp>
+  <body>
+    <xmp
+>
         1단계: 스크립트 플러그인 추가하기
         2단계: 임포트 선언. 플러그인 방식에서는 필요 없음.
             import React from 'react';
@@ -25,16 +25,44 @@
         3단계: 컴포넌트 만들기
         4단계: DOM에 컴포넌트 주입
     </xmp>
-    <hr>
+    <hr />
 
     <div id="app"></div>
-</body>
-
+  </body>
 </html>
 
 <!-- react 플러그인 include   -->
 <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+<script type="text/babel">
+  function UserGreeting(props) {
+    return <h1>Welcome back! {props.isLogin + ""}</h1>;
+  }
+  function GuestGreeting(props) {
+    return <h1>please sign up</h1>;
+  }
+  class Greeting extends React.Component {
+    render() {
+      //isLogin의 값에 따라 리턴하는 컴포넌트 분기한다.
+      //isLogin은 부모로부터 받는 값이다.
+      const isLogin = this.props.isLogin;
 
+      //기능추가. 부모로부터 받은 props를 자식 component한테 넘기시오
 
-
+      if (isLogin) {
+        return <UserGreeting {...this.props}></UserGreeting>;
+      } else {
+        return <GuestGreeting {...this.props}></GuestGreeting>;
+      }
+    }
+  }
+  //Greeting 컴포넌트의 인자로 isLogin을 넘긴다.
+  //isLogin 값으로는 true를 넘기도록 설정
+  ReactDOM.render(
+    <Greeting isLogin={true}></Greeting>,
+    document.getElementById("app")
+  );
+</script>
