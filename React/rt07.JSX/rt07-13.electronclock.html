@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
 
-    <link rel="stylesheet" href="../css/reset.css"/>
-</head>
+    <link rel="stylesheet" href="../css/reset.css" />
+  </head>
 
-<body>
+  <body>
     <pre>
 
     <img src="../images/electronclock.png" alt="">
@@ -19,15 +18,52 @@
 
 
     </pre>
-    <hr>
+    <hr />
 
     <div id="app"></div>
-</body>
-
+  </body>
 </html>
 
 <!-- react 플러그인 include   -->
 <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
 
-
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+<script type="text/babel">
+  const d = new Date();
+  const h = d.getHours();
+  const m = d.getMinutes();
+  const s = d.getSeconds();
+  class ElectronClock extends React.Component {
+    state = {
+      style1: {
+        fontSize: "80px",
+      },
+    };
+    z2(val) {
+      //1 --> 01로 바꾸는 함수
+      //11 --> 11리턴
+      const str = "00" + val;
+      //000 --> 01
+      return str.substr(str.length - 2, 2);
+    }
+    render() {
+      const d = new Date();
+      const h = d.getHours();
+      const m = d.getMinutes();
+      const s = d.getSeconds();
+      return (
+        <div style={this.state.style1}>
+          {this.z2(h)} : {this.z2(m)} : {this.z2(s)}
+        </div>
+      );
+    }
+  }
+  window.setInterval(function () {
+    ReactDOM.render(
+      <ElectronClock></ElectronClock>,
+      document.getElementById("app")
+    );
+  }, 1000);
+</script>

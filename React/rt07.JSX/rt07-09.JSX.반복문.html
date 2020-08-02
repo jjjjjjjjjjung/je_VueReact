@@ -34,9 +34,10 @@
   const elements = ["one", "two", "three"];
   class Loop1 extends React.Component {
     render() {
+      const items = this.props.items;
       let arrs = [];
-      for (let index in elements) {
-        arrs.push(<li key={index}>{elements[index]}</li>);
+      for (let index in items) {
+        arrs.push(<li key={index}>{items[index]}</li>);
       }
       return <div>{arrs}</div>;
     }
@@ -44,10 +45,11 @@
 
   class Loop2 extends React.Component {
     render() {
+      const items = this.props.items;
       let arrs = [];
       //let[x,y] = [1,2];
       //elements.entries() 는 [key,value]값을 리턴한다
-      for (let [key, val] of elements.entries()) {
+      for (let [key, val] of items.entries()) {
         arrs.push(<li key={key}>{val}</li>);
         console.log({ key }, { val });
       }
@@ -57,9 +59,10 @@
 
   class Loop3 extends React.Component {
     render() {
+      const items = this.props.items;
       return (
         <div>
-          {elements.map(function (value, key) {
+          {items.map(function (value, key) {
             return <li key={key}>{value}</li>;
           })}
         </div>
@@ -67,7 +70,16 @@
     }
   }
 
-  ReactDOM.render(<Loop1></Loop1>, document.getElementById("wrap1"));
-  ReactDOM.render(<Loop2></Loop2>, document.getElementById("wrap2"));
-  ReactDOM.render(<Loop3></Loop3>, document.getElementById("wrap3"));
+  ReactDOM.render(
+    <Loop1 items={elements}></Loop1>,
+    document.getElementById("wrap1")
+  );
+  ReactDOM.render(
+    <Loop2 items={elements}></Loop2>,
+    document.getElementById("wrap2")
+  );
+  ReactDOM.render(
+    <Loop3 items={elements}></Loop3>,
+    document.getElementById("wrap3")
+  );
 </script>
